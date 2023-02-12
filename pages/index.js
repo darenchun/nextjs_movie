@@ -11,7 +11,7 @@ export default function Home() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Email: ${email} Password: ${password}`);
-    
+
     // Perform login logic here (e.g. send a request to a server)
     const getInitialProps = async function () {
       const response = await axios.get('');
@@ -35,6 +35,10 @@ export default function Home() {
           <div>
             <Link href="http://jdkserver.ipdisk.co.kr:80">
               My Nas at Home
+            </Link>
+            <br />
+            <Link href="/posts/first_post">
+              to youtube dwn link
             </Link>
           </div>
         </form>

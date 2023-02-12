@@ -1,20 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-const MyImage = () => (
-    <Image
-        src="/images/screenshot_01.png"
-        height={144}
-        width={144}
-        alt="Your name" />
-);
-
-const numbering_arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function FirstPost() {
     /* states */
     const [vidUrl, setUrl] = React.useState("");
     const [vidDownSite, setDownSite] = React.useState([]);
+    const [bool_, setBool_] = React.useState(false);
     
     /* state handlers with javascript */
     // inputbox text saving
@@ -27,11 +19,13 @@ export default function FirstPost() {
             const target = "youtube"; // finds 1st appearance of youtube
             const replacement = "youtubepp"; // replace that word
             const index = str.indexOf(target);
-            if (index !== -1) {
+            if (index !== -1) { // only when it exits
                 const firstPart = str.substring(0, index);
                 const secondPart = str.substring(index + target.length);
                 const newStr = firstPart + replacement + secondPart;
                 setDownSite(newStr); // set download site url
+
+                // additional function to open a new tab in browser with new url
                 function openInNewTab(newStr) { 
                     const a = document.createElement('a'); 
                     a.href = newStr; 
@@ -40,7 +34,9 @@ export default function FirstPost() {
                     a.click(); 
                 }
                 openInNewTab();
+                setBool_(false);
             } else {
+                setBool_(true);
             }
 
         })
@@ -58,7 +54,7 @@ export default function FirstPost() {
                 handleClick();
             }}>get vids!!</button>
             <p>{vidDownSite}</p>
-
+            <p>{bool_?"not a valid url input!":""}</p>
         </>
     );
 }
