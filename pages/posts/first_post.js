@@ -8,25 +8,21 @@ const MyImage = () => (
         width={144}
         alt="Your name" />
 );
-
-const numbering_arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-
-
 export default function FirstPost() {
     const [likes, setLikes] = React.useState(0);
-    const handleClick = () =>{setLikes(likes+1)};
+    const [bads, setBads] = React.useState(0);
+    const handleLikeClick = () => { setLikes(likes + 1) };
+    const handleBadClick = () => { setBads(bads + 1); };
 
-    
     return (
         <>
             <h1>First Post</h1>
             <h2>
                 <Link href="/">Back to Home</Link>
             </h2>
-            <br />
-            <button onClick={handleClick}>Likes : ({likes})</button>
+            <br/>
+            <button onClick={handleLikeClick}>Likes : ({likes})</button>
+            <button onClick={handleBadClick}>bads : ({bads})</button>
         </>
     );
-
 }
