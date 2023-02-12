@@ -13,24 +13,24 @@ const numbering_arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function FirstPost() {
     /* states */
-    // const [likes, setLikes] = React.useState(0); /* useState sets it's initial form with arrays, with variable to remember state and a function that modifies the state */
     const [vidUrl, setUrl] = React.useState("");
     const [vidDownSite, setDownSite] = React.useState([]);
-    // const [string_literals, setString_literals] = React.useState("");
-
-
+    
     /* state handlers with javascript */
+    // inputbox text saving
+    const handleURLInput = (event) => { setUrl(event.target.value) }
+
+    // makes, sends, redirects according to input
     const handleClick = () => {
         setDownSite(() => {
             const str = vidUrl; // get what user wrote in input box
-            const target = "youtube";
-            const replacement = "youtubepp";
+            const target = "youtube"; // finds 1st appearance of youtube
+            const replacement = "youtubepp"; // replace that word
             const index = str.indexOf(target);
             if (index !== -1) {
                 const firstPart = str.substring(0, index);
                 const secondPart = str.substring(index + target.length);
                 const newStr = firstPart + replacement + secondPart;
-                console.log(newStr);
                 setDownSite(newStr); // set download site url
                 function openInNewTab(newStr) { 
                     const a = document.createElement('a'); 
@@ -41,13 +41,11 @@ export default function FirstPost() {
                 }
                 openInNewTab();
             } else {
-                console.log(str);
             }
 
         })
     };
-    const handleURLInput = (event) => { setUrl(event.target.value) }
-    // const handleString = () =vidUrlsdocument.getElementById("vidUrl"))g_literals(string_literals + "ㄱ") };
+   
     return (
         <>
             <h1>First Post</h1>
