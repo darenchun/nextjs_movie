@@ -3,45 +3,46 @@ import Image from 'next/image';
 import React from 'react';
 
 export default function FirstPost() {
+    /* etc functions for use */
+    // additional function to open a new tab in browser with new url : basically just making a new tab click of 'a' tag.
+    function openInNewTab(newStr) {
+        const a = document.createElement('a');
+        a.href = newStr;
+        a.target = "_blank"; // new tab.
+        a.rel = "noopener noreferrer"; //security reasons
+        a.click();
+    }
+
+
     /* states */
     const [vidUrl, setUrl] = React.useState("");
     const [vidDownSite, setDownSite] = React.useState([]);
     const [bool_, setBool_] = React.useState(false);
-    
+
     /* state handlers with javascript */
     // inputbox text saving
     const handleURLInput = (event) => { setUrl(event.target.value) }
 
-    // makes, sends, redirects according to input
+    // makes, sends, redirects according to input.
     const handleClick = () => {
         setDownSite(() => {
-            const str = vidUrl; // get what user wrote in input box
-            const target = "youtube"; // finds 1st appearance of youtube
-            const replacement = "youtubepp"; // replace that word
+            const str = vidUrl; // get what user wrote in input box.
+            const target = "youtube"; // finds 1st appearance of youtube.
+            const replacement = "youtubepp"; // replace that word.
             const index = str.indexOf(target);
             if (index !== -1) { // only when it exits
                 const firstPart = str.substring(0, index);
                 const secondPart = str.substring(index + target.length);
                 const newStr = firstPart + replacement + secondPart;
-                setDownSite(newStr); // set download site url
-
-                // additional function to open a new tab in browser with new url
-                function openInNewTab(newStr) { 
-                    const a = document.createElement('a'); 
-                    a.href = newStr; 
-                    a.target = "_blank"; 
-                    a.rel = "noopener noreferrer"; 
-                    a.click(); 
-                }
-                openInNewTab();
+                setDownSite(newStr); // set download site url.
+                openInNewTab(newStr);
                 setBool_(false);
             } else {
                 setBool_(true);
             }
-
         })
     };
-   
+
     return (
         <>
             <h1>First Post</h1>
@@ -54,7 +55,7 @@ export default function FirstPost() {
                 handleClick();
             }}>get vids!!</button>
             <p>{vidDownSite}</p>
-            <p>{bool_?"not a valid url input!":""}</p>
+            <p>{bool_ ? "not a valid url input!" : ""}</p>
         </>
     );
 }

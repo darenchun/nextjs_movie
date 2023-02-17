@@ -13,11 +13,13 @@ export default function Home() {
     console.log(`Email: ${email} Password: ${password}`);
 
     // Perform login logic here (e.g. send a request to a server)
-    const getInitialProps = async function () {
+    const future = async () => {
       const response = await axios.get('');
       return { data: response.data };
     };
+
   };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -33,12 +35,9 @@ export default function Home() {
           <button type="submit">Login</button>
           <br />
           <div>
-            <Link href="http://jdkserver.ipdisk.co.kr:80">
-              My Nas at Home
-            </Link>
             <br />
             <Link href="/posts/first_post">
-              to youtube dwn link
+              <h1>to youtube dwn link</h1>
             </Link>
           </div>
         </form>
