@@ -46,6 +46,7 @@ export default function FirstPost() {
   return (
     <>
       <div id="first_division">
+        <p>URL combinator</p>
         <input type="text" value={vidUrl} onChange={handleURLInput} />
         <button onClick={() => { handleClick_URL_combinator(); }}>get vids!!</button>
         <p>{vidDownSite}</p>
@@ -53,8 +54,9 @@ export default function FirstPost() {
       </div>
       <br />
       <div id="second_division">
+        <p></p>
         <input type="text"  value={input_second} onChange={handleSetInput_second} />
-        <button onClick={() => { handleClick_URL_combinator(); }}>get vids!!</button>
+        <button onClick={() => { handleClick_URL_combinator(); }}></button>
         <p>{input_second}</p>
       </div>
 
