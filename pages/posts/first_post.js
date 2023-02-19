@@ -43,9 +43,10 @@ export default function FirstPost() {
         })
     };
 
+
+
     return (
         <>
-            <h1>First Post</h1>
             <h2>
                 <Link href="/">Back to Home</Link>
             </h2>
@@ -56,6 +57,11 @@ export default function FirstPost() {
             }}>get vids!!</button>
             <p>{vidDownSite}</p>
             <p>{bool_ ? "not a valid url input!" : ""}</p>
+
+
+
+            
+
         </>
     );
 }
