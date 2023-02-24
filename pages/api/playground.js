@@ -1,19 +1,25 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import axios from 'axios';
-
 export default async function videoCrawl(req, res) {
-    const { chromium } = require('playwright');
-    const jsdom = require('jsdom'); // kinda wierd but jsdom is not applicable in client-side code. so I am writing this here.
-    const { JSDOM } = jsdom;
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
 
-    (async () => {
-        const browser = await chromium.launch();
-        const page = await browser.newPage();
-        await page.goto('https://noonoo28.tv/en_drama/5191#afdf0ec7sF1AScGo');
-        const html = await page.content();
-        const dom = new JSDOM(html);
-        const title = dom.window.document.querySelector('video');
-        console.log(html);
-        await browser.close();
-    })();
-}
+    // Handle request
+    if (req.method === 'GET') {
+        // Your code for handling GET requests goes here
+    } else if (req.method === 'POST') {
+        // Your code for handling POST requests goes here
+    } else if (req.method === 'PUT') {
+        // Your code for handling PUT requests goes here
+    } else if (req.method === 'DELETE') {
+        // Your code for handling DELETE requests goes here
+    } else {
+        res.status(405).json({ message: 'Method Not Allowed' });
+    }
+    
+    res = await fetch('https://noonoo28.tv/en_drama/5191#afdf0ec7sF1AScGo');
+    return res;
+};
+
+

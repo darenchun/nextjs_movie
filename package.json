@@ -5,15 +5,19 @@
     "build": "next build",
     "start": "next start"
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "dependencies": {
     "axios": "^1.2.6",
     "cheerio": "^1.0.0-rc.12",
+    "chrome-aws-lambda": "^10.1.0",
     "express": "^4.18.2",
-    "fs": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.6",
-    "jsdom": "^21.1.0",
+    "jsdom-global": "^3.0.2",
     "next": "^13.1.6",
-    "playwright": "^1.30.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tls": "^0.0.1"

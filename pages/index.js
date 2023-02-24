@@ -1,13 +1,29 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import videoCrawl from './api/playground';
+import videoCrawl from "./api/playground";
+import { NextRequest } from 'next/server';
 
 export default function FirstPost() {
   /* play ground */
-  videoCrawl();
+  const [videoSource, setVideoSource] = useState('');
+
+  useEffect(() => {
+    async function fetchVideoSource() {
+      const response = videoCrawl();
+
+      console.log("response: ", response);
+      // const html = await response.text();
+      // const parser = new DOMParser();
+      // const doc = parser.parseFromString(html, 'text/html');
+      // const videoElement = doc.querySelector('video');
+      // if (videoElement) {
+      //   const videoSource = videoElement.getAttribute('src');
+      //   setVideoSource(videoSource);
+      // }
+    }
+    fetchVideoSource();
+  }, []);
 
   /* play ground */
   /* etc functions for use */
@@ -108,6 +124,15 @@ export default function FirstPost() {
           } : ""}
         </div>
       </div>
+      <br />
+      <div>
+        {videoSource && (
+          <video controls>
+            <source src={videoSource} type="video/mp4" />
+          </video>
+        )}
+      </div>
+
     </>
   );
 }
