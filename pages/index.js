@@ -1,8 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import cheerio from 'cheerio';
+import videoCrawl from './api/playground';
 
 export default function FirstPost() {
+  /* play ground */
+  videoCrawl();
+
+  /* play ground */
   /* etc functions for use */
   // additional function to open a new tab in browser with new url : basically just making a new tab click of 'a' tag.
   function openInNewTab(newStr) {
@@ -12,18 +19,24 @@ export default function FirstPost() {
     a.rel = "noopener noreferrer"; //security reasons
     a.click();
   }
-
+  // http/http format decider
+  const isValidUrl = (input) => {
+    const urlRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
+    return urlRegex.test(input);
+  };
 
   /* states */
   const [bool_, setBool_] = React.useState(false);
+  const [bool_2, setBool_2] = React.useState(false);
   const [vidUrl, setUrl] = React.useState("");
   const [input_second, setInput_second] = React.useState("");
   const [vidDownSite, setDownSite] = React.useState([]);
+  const [videoList, setVideoList] = useState([]);
 
   /* state handlers with javascript */
   // inputbox text saving
-  const handleURLInput = (event) => { setUrl(event.target.value) }
-  const handleSetInput_second = (event) =>{setInput_second(event.target.value)}
+  const handleURLInput = (event) => { setUrl(event.target.value); }
+  const handleSetInput_second = (event) => { setInput_second(event.target.value); }
   // makes, sends, redirects according to input.
   const handleClick_URL_combinator = () => {
     setDownSite(() => {
@@ -43,6 +56,28 @@ export default function FirstPost() {
       }
     })
   };
+
+  const handleClick_videoList_gen = async () => {
+    if (isValidUrl(input_second)) {
+      console.log("its valid!!");
+      console.log(input_second);
+      const url = "/api/endpoint_api"; // replace with your URL
+      const result = await axios.post(url, { test: input_second });
+      console.log(JSON.parse(JSON.stringify(result.data)));
+      const $ = cheerio.load(result.data);
+      // const urls = $('video').map(function () {
+      //   return $(this).attr('src');
+      // }).get();
+      const urls = $('video');
+      console.log(urls);
+      setVideoList(urls);
+    } else {
+      console.log("its not valid!!");
+      setBool_2(true);
+    }
+  };
+
+
   return (
     <>
       <div id="first_division">
@@ -55,16 +90,24 @@ export default function FirstPost() {
       <br />
       <div id="second_division">
         <p></p>
-        <input type="text"  value={input_second} onChange={handleSetInput_second} />
-        <button onClick={() => { handleClick_URL_combinator(); }}></button>
+        <input type="text" value={input_second} onChange={handleSetInput_second} />
+        <button onClick={() => { handleClick_videoList_gen(); }}>secondPart</button>
         <p>{input_second}</p>
+        <p>{bool_2 ? "not a valid url input!" : ""}</p>
       </div>
-
-
-
-
-
-
+      <div>
+        <p>Video list and thumbnails</p>
+        <div id="video_list">
+          {videoList.length !== 0 ? () => {
+            videoList.map((url, index) => (
+              <div key={index}>
+                <video src={url} width="320" height="240" controls />
+                <p>Size: {url.size}</p> {/* replace with the actual size */}
+              </div>
+            ))
+          } : ""}
+        </div>
+      </div>
     </>
   );
 }
