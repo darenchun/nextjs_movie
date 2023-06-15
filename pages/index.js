@@ -9,20 +9,6 @@ export default function FirstPost() {
   const [videoSource, setVideoSource] = useState('');
 
   useEffect(() => {
-    async function fetchVideoSource() {
-      const response = videoCrawl();
-
-      console.log("response: ", response);
-      // const html = await response.text();
-      // const parser = new DOMParser();
-      // const doc = parser.parseFromString(html, 'text/html');
-      // const videoElement = doc.querySelector('video');
-      // if (videoElement) {
-      //   const videoSource = videoElement.getAttribute('src');
-      //   setVideoSource(videoSource);
-      // }
-    }
-    fetchVideoSource();
   }, []);
 
   /* play ground */

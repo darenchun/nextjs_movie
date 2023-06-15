@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import React from 'react';
 
 export default function FirstPost() {
@@ -27,23 +26,26 @@ export default function FirstPost() {
     const handleClick = () => {
         setDownSite(() => {
             const str = vidUrl; // get what user wrote in input box.
+
             const target = "youtube"; // finds 1st appearance of youtube.
             const replacement = "youtubepp"; // replace that word.
-            const index = str.indexOf(target);
+
+            const index = str.indexOf(target);// finds 'y' in youtube.
+
             if (index !== -1) { // only when it exits
+                /* replacing youtube to youtubepp */
                 const firstPart = str.substring(0, index);
                 const secondPart = str.substring(index + target.length);
                 const newStr = firstPart + replacement + secondPart;
-                setDownSite(newStr); // set download site url.
-                openInNewTab(newStr);
-                setBool_(false);
+
+                setDownSite(newStr); // set download site url. : www.youtubepp.com
+                openInNewTab(newStr); // open in new tab.
+                setBool_(false); // set flag to false for showing url for ux.
             } else {
-                setBool_(true);
+                setBool_(true); // true : "not a valid url input"
             }
         })
     };
-
-
 
     return (
         <>
@@ -57,10 +59,6 @@ export default function FirstPost() {
             }}>get vids!!</button>
             <p>{vidDownSite}</p>
             <p>{bool_ ? "not a valid url input!" : ""}</p>
-
-
-
-
 
         </>
     );
